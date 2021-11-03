@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+
+<ui:composition template="/template.xhtml">
+    <!-- Header -->
+    <ui:define name="pageHeader">
+        <h:link value="#{msg['form.pageTitle']}" outcome="form"/> |
+        <h:link value="#{msg['list.pageTitle']}" outcome="list"/>
+    </ui:define>
+
+    <!-- Body -->
+    <ui:define name="body">
+        <h:form>
+            <!-- Student ID and Name -->
+            <div class="row g-2 mt-1">
+                <div class="col-md">
+                    <div class="form-floating">
+                        <h:inputText value="#{reservationFormBean.reservation.studentId}" class="form-control"
+                                     id="studentId"> </h:inputText>
+                        <label class="form-label" for="studentId">Student ID</label>
+                    </div>
+                </div>
+
+                <div class="col-md">
+                    <div class="form-floating">
+                        <h:inputText value="#{reservationFormBean.reservation.studentName}" class="form-control"
+                                     id="studentName"> </h:inputText>
+                        <label class="form-label" for="studentName">Student Name</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Discussion Room -->
+            <div class="row g-2 mt-1">
+                <div class="col-md">
+                    <div class="form-floating">
+                        <h:selectOneMenu value="#{reservationFormBean.reservation.room}" class="form-select"
+                                         id="discussionRoom" aria-label="Discussion room">
+                            <f:selectItem itemValue="1" itemLabel="Discussion Room A"/>
+                            <f:selectItem itemValue="2" itemLabel="Discussion Room B"/>
+                            <f:selectItem itemValue="3" itemLabel="Discussion Room C"/>
+                        </h:selectOneMenu>
+                        <label class="form-label" for="discussionRoom">Discussion Room</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Date -->
+            <div class="row g-2 mt-1">
+                <div class="col-md">
+                    <div class="form-floating">
+                        <h:inputText value="#{reservationFormBean.reservation.date}" class="form-control"
+                                     id="date"></h:inputText>
+                        <label class="form-label" for="date">Date</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Time Start and End -->
+            <div class="row g-2 mt-1">
+
+                <!-- Start Time -->
+                <div class="col-md">
+                    <div class="form-floating">
+                        <h:selectOneMenu value="#{reservationFormBean.reservation.startTime}" class="form-select"
+                                         id="startTime" aria-label="Start Time">
+                            <f:selectItem itemValue="0" itemLabel="7:00 AM"/>
+                            <f:selectItem itemValue="30" itemLabel="7:30 AM"/>
+                            <f:selectItem itemValue="60" itemLabel="8:00 AM"/>
+                            <f:selectItem itemValue="90" itemLabel="8:30 AM"/>
+                            <f:selectItem itemValue="120" itemLabel="9:00 AM"/>
+                            <f:selectItem itemValue="150" itemLabel="9:30 AM"/>
+                            <f:selectItem itemValue="180" itemLabel="10:00 AM"/>
+                            <f:selectItem itemValue="210" itemLabel="10:30 AM"/>
+                            <f:selectItem itemValue="240" itemLabel="11:00 AM"/>
+                            <f:selectItem itemValue="270" itemLabel="11:30 AM"/>
+                            <f:selectItem itemValue="300" itemLabel="12:00 PM"/>
+                            <f:selectItem itemValue="330" itemLabel="12:30 PM"/>
+                            <f:selectItem itemValue="360" itemLabel="1:00 PM"/>
+                            <f:selectItem itemValue="390" itemLabel="1:30 PM"/>
+                            <f:selectItem itemValue="420" itemLabel="2:00 PM"/>
+                            <f:selectItem itemValue="450" itemLabel="2:30 PM"/>
+                            <f:selectItem itemValue="480" itemLabel="3:00 PM"/>
+                            <f:selectItem itemValue="510" itemLabel="3:30 PM"/>
+                            <f:selectItem itemValue="540" itemLabel="4:00 PM"/>
+                            <f:selectItem itemValue="570" itemLabel="4:30 PM"/>
+                            <f:selectItem itemValue="600" itemLabel="5:00 PM"/>
+                            <f:selectItem itemValue="630" itemLabel="5:30 PM"/>
+                            <f:selectItem itemValue="760" itemLabel="6:00 PM"/>
+                            <f:selectItem itemValue="790" itemLabel="6:30 PM"/>
+                            <f:selectItem itemValue="820" itemLabel="7:00 PM"/>
+                        </h:selectOneMenu>
+                        <label class="form-label" for="startTime">Start Time</label>
+                    </div>
+                </div>
+
+                <!-- End Time -->
+                <div class="col-md">
+                    <div class="form-floating">
+                        <h:selectOneMenu value="#{reservationFormBean.reservation.endTime}" class="form-select"
+                                         id="endTime" aria-label="End Time">
+                            <f:selectItem itemValue="0" itemLabel="7:00 AM"/>
+                            <f:selectItem itemValue="30" itemLabel="7:30 AM"/>
+                            <f:selectItem itemValue="60" itemLabel="8:00 AM"/>
+                            <f:selectItem itemValue="90" itemLabel="8:30 AM"/>
+                            <f:selectItem itemValue="120" itemLabel="9:00 AM"/>
+                            <f:selectItem itemValue="150" itemLabel="9:30 AM"/>
+                            <f:selectItem itemValue="180" itemLabel="10:00 AM"/>
+                            <f:selectItem itemValue="210" itemLabel="10:30 AM"/>
+                            <f:selectItem itemValue="240" itemLabel="11:00 AM"/>
+                            <f:selectItem itemValue="270" itemLabel="11:30 AM"/>
+                            <f:selectItem itemValue="300" itemLabel="12:00 PM"/>
+                            <f:selectItem itemValue="330" itemLabel="12:30 PM"/>
+                            <f:selectItem itemValue="360" itemLabel="1:00 PM"/>
+                            <f:selectItem itemValue="390" itemLabel="1:30 PM"/>
+                            <f:selectItem itemValue="420" itemLabel="2:00 PM"/>
+                            <f:selectItem itemValue="450" itemLabel="2:30 PM"/>
+                            <f:selectItem itemValue="480" itemLabel="3:00 PM"/>
+                            <f:selectItem itemValue="510" itemLabel="3:30 PM"/>
+                            <f:selectItem itemValue="540" itemLabel="4:00 PM"/>
+                            <f:selectItem itemValue="570" itemLabel="4:30 PM"/>
+                            <f:selectItem itemValue="600" itemLabel="5:00 PM"/>
+                            <f:selectItem itemValue="630" itemLabel="5:30 PM"/>
+                            <f:selectItem itemValue="760" itemLabel="6:00 PM"/>
+                            <f:selectItem itemValue="790" itemLabel="6:30 PM"/>
+                            <f:selectItem itemValue="820" itemLabel="7:00 PM"/>
+                        </h:selectOneMenu>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Purpose -->
+            <div class="row g-2 mt-1">
+                <div class="col-md">
+                    <div class="form-floating">
+                        <h:inputTextarea value="#{reservationFormBean.reservation.purpose}" class="form-control"
+                                         style="height: 80px" id="purpose"></h:inputTextarea>
+                        <label class="form-label" for="purpose">Purpose</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Endorser -->
+            <div class="row g-2 mt-1">
+                <div class="col-md">
+                    <div class="form-floating">
+                        <h:inputText value="#{reservationFormBean.reservation.endorser}" type="text"
+                                     class="form-control" id="endorser"></h:inputText>
+                        <label class="form-label" for="endorser">Endorser</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Submit button -->
+            <div class="d-grid mt-4">
+                <h:commandButton class="btn btn-primary" value="Submit"
+                                 action="#{reservationFormBean.addReservation()}"/>
+            </div>
+        </h:form>
+    </ui:define>
+</ui:composition>
+</html>
