@@ -20,7 +20,7 @@ public class ReservationEntity {
     @Column(name = "room")
     private String room;
 
-    @Column(name = "date")
+    @Column(name = "reservation_date")
     private Date date;
 
     @Column(name = "start_time")
