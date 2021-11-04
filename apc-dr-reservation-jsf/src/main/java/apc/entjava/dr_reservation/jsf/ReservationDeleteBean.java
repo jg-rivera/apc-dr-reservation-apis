@@ -23,12 +23,12 @@ public class ReservationDeleteBean implements Serializable {
 	@Inject
 	private Conversation conversation;
 
-	private long itemId;
+	private int reservationId;
 
 	private ReservationEntity currentReservation;
 
 	public void fetchReservation() {
-		this.currentReservation = reservationRepositoryBean.findReservation(this.itemId);
+		this.currentReservation = reservationRepositoryBean.findReservation(this.reservationId);
 		conversation.begin();
 	}
 
@@ -44,12 +44,12 @@ public class ReservationDeleteBean implements Serializable {
 		return "list?faces-redirect=true";
 	}
 
-	public long getItemId() {
-		return itemId;
+	public int getReservationId() {
+		return reservationId;
 	}
 
-	public void setItemId(long itemId) {
-		this.itemId = itemId;
+	public void setReservationId(int reservationId) {
+		this.reservationId = reservationId;
 	}
 
 	public ReservationEntity getReservation() {

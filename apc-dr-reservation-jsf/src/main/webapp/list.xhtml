@@ -14,15 +14,7 @@
         <h:link value="#{msg['list.pageTitle']}" outcome="list"/>
     </ui:define>
 
-    <ui:define name="body">
-        <h:form>
-            <h:outputLabel value="Search by Name:"/>
-            <h:inputText id="searchInput" value="#{reservationFormBean.searchText}"/>
-            <h:commandButton action="#{reservationFormBean.searchByName}" value="Search">
-                <f:ajax execute="searchInput" render="dataTable"/>
-            </h:commandButton>
-        </h:form>
-
+    <ui:define name="pageBody">
         <h:dataTable id="dataTable" value="#{reservationFormBean.existingReservations}" var="item">
             <h:column>
                 <f:facet name="header">Name</f:facet>

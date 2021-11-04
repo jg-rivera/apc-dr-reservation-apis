@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+
+<ui:composition template="/template.xhtml">
+    <ui:define name="pageTitle">
+        <h:outputText value="#{msg['index.pageTitle']}"></h:outputText>
+    </ui:define>
+
+    <ui:define name="stylesheets">
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"/>
+    </ui:define>
+
+    <ui:define name="pageHeader">
+        <header class="w3-display-container w3-content w3-wide" style="max-width:1500px;" id="home">
+            <h:graphicImage styleClass="w3-image" width="1500" library="img" name="apc.jpg"></h:graphicImage>
+            <div class="w3-display-middle w3-margin-top w3-center">
+                <h1 class="w3-text w3-text-white">
+                    <span class="w3-padding w3-black w3-opacity-min"><b>APC Library</b></span>
+                </h1>
+                <h2><span class="w3-text w3-text-light-grey">Discussion Room Reservations</span></h2>
+                <h3><span class="w3-text w3-text-light-grey">List of Reservations</span></h3>
+            </div>
+        </header>
+    </ui:define>
+</ui:composition>
+</html>

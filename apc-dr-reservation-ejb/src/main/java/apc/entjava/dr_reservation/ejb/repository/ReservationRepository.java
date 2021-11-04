@@ -39,10 +39,11 @@ public class ReservationRepository implements IReservationRepository {
 
     @Override
     public void updateReservation(ReservationEntity item) {
-        Query query = this.entityManager.createQuery("UPDATE ReservationEntity reservation SET reservation.name=:itemName, reservation.availableDate=:itemDate, reservation.description=:itemDesc where c.itemId=:id");
+        Query query = this.entityManager.createQuery("UPDATE ReservationEntity reservation SET reservation.room=:room, reservation.studentName=:studentName, reservation.date=:date, reservation.endorser=:endorser WHERE reservation.id=:id");
 
+        query.setParameter("id", item.getId());
         query.setParameter("room", item.getRoom());
-        query.setParameter("itemName", item.getName());
+        query.setParameter("studentName", item.getStudentName());
         query.setParameter("date", item.getDate());
         query.setParameter("endorser", item.getEndorser());
         query.executeUpdate();
@@ -52,8 +53,6 @@ public class ReservationRepository implements IReservationRepository {
     public ReservationEntity findReservation(int id) {
         return this.entityManager.find(ReservationEntity.class, id);
     }
-
-
 
 
     @Override

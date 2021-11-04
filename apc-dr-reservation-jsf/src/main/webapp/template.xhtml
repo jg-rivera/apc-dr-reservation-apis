@@ -2,13 +2,14 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:xlink="http://www.w3.org/1999/xlink">
 
 <f:loadBundle basename="messages" var="msg"/>
 
 <!-- Head -->
 <h:head>
-    <title><ui:insert name="pageTitle">Page Title</ui:insert></title>
+    <title><ui:insert name="pageTitle"></ui:insert></title>
 
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
@@ -18,13 +19,15 @@
           integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous"/>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.6.1/font/bootstrap-icons.css"/>
 
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="container-fluid">
+    <ui:insert name="stylesheets"></ui:insert>
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container container-fluid">
             <a class="navbar-brand" href="#">
                 <i class="bi bi-book-half"></i>
             </a>
 
-            <a class="navbar-brand" href="#">APC Discussion Room Reservations</a>
+            <a class="navbar-brand" href="index.xhtml">APC Discussion Room Reservations</a>
 
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
                     aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
@@ -33,8 +36,8 @@
 
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav">
-                    <a class="nav-link active" aria-current="page" href="#">Home</a>
-                    <a class="nav-link" href="form.html">Create Reservation</a>
+                    <a class="nav-link" href="index.xhtml">Home</a>
+                    <a class="nav-link" href="xform.html">Create Reservation</a>
                 </div>
             </div>
         </div>
@@ -46,8 +49,12 @@
 <!-- Body -->
 <body>
 
-<ui:insert name="pageHeader">Page Header</ui:insert>
-<ui:insert name="body">Page Body</ui:insert>
+<div class="container-fluid container">
+    <div class="d-flex mt-5 justify-content-between mb-3">
+        <ui:insert name="pageHeader"></ui:insert>
+    </div>
+    <ui:insert name="pageBody"></ui:insert>
+</div>
 
 <!-- Footer -->
 <div class="container mt-5">
@@ -69,5 +76,12 @@
 </div>
 
 </body>
+
+<!-- Bootstrap Scripts -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+        crossorigin="anonymous"></script>
+
+<ui:insert name="scripts"></ui:insert>
 
 </html>

@@ -57,14 +57,6 @@ public class ReservationFormBean implements Serializable {
         return false;
     }
 
-    public String getSearchText() {
-        return searchText;
-    }
-
-    public void setSearchText(String searchText) {
-        this.searchText = searchText;
-    }
-
     public ReservationEntity getReservation() {
         return currentReservation;
     }

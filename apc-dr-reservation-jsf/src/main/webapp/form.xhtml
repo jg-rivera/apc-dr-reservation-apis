@@ -2,33 +2,42 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
 
 <ui:composition template="/template.xhtml">
-    <!-- Header -->
-    <ui:define name="pageHeader">
-        <h:link value="#{msg['form.pageTitle']}" outcome="form"/> |
-        <h:link value="#{msg['list.pageTitle']}" outcome="list"/>
+    <ui:define name="pageTitle">
+        <h:outputText value="#{msg['form.pageTitle']}"></h:outputText>
     </ui:define>
 
-    <!-- Body -->
-    <ui:define name="body">
+    <ui:define name="stylesheets">
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css"/>
+    </ui:define>
+
+    <ui:define name="pageHeader">
+        <h2><h:outputText value="#{msg['form.pageTitle']}"></h:outputText></h2>
+    </ui:define>
+
+    <ui:define name="pageBody">
         <h:form>
+
             <!-- Student ID and Name -->
             <div class="row g-2 mt-1">
                 <div class="col-md">
                     <div class="form-floating">
                         <h:inputText value="#{reservationFormBean.reservation.studentId}" class="form-control"
+                                     a:placeholder="Student ID"
                                      id="studentId"> </h:inputText>
-                        <label class="form-label" for="studentId">Student ID</label>
+                        <h:outputLabel class="form-label" for="studentId">Student ID</h:outputLabel>
                     </div>
                 </div>
 
                 <div class="col-md">
                     <div class="form-floating">
                         <h:inputText value="#{reservationFormBean.reservation.studentName}" class="form-control"
+                                     a:placeholder="Student Name"
                                      id="studentName"> </h:inputText>
-                        <label class="form-label" for="studentName">Student Name</label>
+                        <h:outputLabel class="form-label" for="studentName">Student Name</h:outputLabel>
                     </div>
                 </div>
             </div>
@@ -43,7 +52,7 @@
                             <f:selectItem itemValue="2" itemLabel="Discussion Room B"/>
                             <f:selectItem itemValue="3" itemLabel="Discussion Room C"/>
                         </h:selectOneMenu>
-                        <label class="form-label" for="discussionRoom">Discussion Room</label>
+                        <h:outputLabel class="form-label" for="discussionRoom">Discussion Room</h:outputLabel>
                     </div>
                 </div>
             </div>
@@ -52,9 +61,10 @@
             <div class="row g-2 mt-1">
                 <div class="col-md">
                     <div class="form-floating">
-                        <h:inputText value="#{reservationFormBean.reservation.date}" class="form-control"
+                        <h:inputText value="#{reservationFormBean.reservation.date}" class="form-control datepicker"
+                                     a:placeholder="Date"
                                      id="date"></h:inputText>
-                        <label class="form-label" for="date">Date</label>
+                        <h:outputLabel class="form-label" for="date">Date</h:outputLabel>
                     </div>
                 </div>
             </div>
@@ -93,7 +103,7 @@
                             <f:selectItem itemValue="790" itemLabel="6:30 PM"/>
                             <f:selectItem itemValue="820" itemLabel="7:00 PM"/>
                         </h:selectOneMenu>
-                        <label class="form-label" for="startTime">Start Time</label>
+                        <h:outputLabel class="form-label" for="startTime">Start Time</h:outputLabel>
                     </div>
                 </div>
 
@@ -128,6 +138,7 @@
                             <f:selectItem itemValue="790" itemLabel="6:30 PM"/>
                             <f:selectItem itemValue="820" itemLabel="7:00 PM"/>
                         </h:selectOneMenu>
+                        <h:outputLabel class="form-label" for="endTime">End Time</h:outputLabel>
                     </div>
                 </div>
             </div>
@@ -137,8 +148,9 @@
                 <div class="col-md">
                     <div class="form-floating">
                         <h:inputTextarea value="#{reservationFormBean.reservation.purpose}" class="form-control"
+                                         a:placeholder="Purpose"
                                          style="height: 80px" id="purpose"></h:inputTextarea>
-                        <label class="form-label" for="purpose">Purpose</label>
+                        <h:outputLabel class="form-label" for="purpose">Purpose</h:outputLabel>
                     </div>
                 </div>
             </div>
@@ -148,8 +160,9 @@
                 <div class="col-md">
                     <div class="form-floating">
                         <h:inputText value="#{reservationFormBean.reservation.endorser}" type="text"
+                                     a:placeholder="Endorser"
                                      class="form-control" id="endorser"></h:inputText>
-                        <label class="form-label" for="endorser">Endorser</label>
+                        <h:outputLabel class="form-label" for="endorser">Endorser</h:outputLabel>
                     </div>
                 </div>
             </div>
@@ -160,6 +173,12 @@
                                  action="#{reservationFormBean.addReservation()}"/>
             </div>
         </h:form>
+    </ui:define>
+
+    <ui:define name="scripts">
+        <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+        <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js"></script>
+        <h:outputScript library="js" name="datepicker.js"></h:outputScript>
     </ui:define>
 </ui:composition>
 </html>
