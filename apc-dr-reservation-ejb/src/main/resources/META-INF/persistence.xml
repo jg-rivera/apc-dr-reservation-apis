@@ -5,7 +5,10 @@
              version="3.0">
   <persistence-unit name="apc-dr-reservation-ejb">
     <properties>
+      <property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/apc_discussion_room_reservation"/>
+      <property name="javax.persistence.jdbc.user" value="root"/>
+      <property name="javax.persistence.jdbc.password" value=""/>
       <property name="javax.persistence.schema-generation.database.action"  value="drop-and-create"/>
     </properties>
   </persistence-unit>

@@ -1,5 +1,20 @@
-footer {
+.gold-container {
     text-align: center;
     padding: 3px;
     background-color: #e7af41;
+    box-shadow: 0 50vh 0 50vh #e7af41;
+    color: white;
+}
+
+h1 {
+    font-size: 100px;
+}
+
+h4 {
+    font-size: 30px;
+}
+
+h2 {
+    color: #35438c;
+    text-align: center;
 }
