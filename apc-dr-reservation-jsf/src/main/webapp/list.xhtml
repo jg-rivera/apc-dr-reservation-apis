@@ -8,41 +8,32 @@
     <f:metadata>
         <f:viewAction action="#{reservationFormBean.initialize}"></f:viewAction>
     </f:metadata>
-    
+
     <ui:define name="pageHeader">
-        <h:link value="#{msg['form.pageTitle']}" outcome="form"/> |
-        <h:link value="#{msg['list.pageTitle']}" outcome="list"/>
+        <div class="d-flex mt-5 justify-content-between mb-3">
+            <h2><h:outputText value="#{msg['list.pageTitle']}"></h:outputText></h2>
+        </div>
+        <div class="mt-4">
+            <p class="mb-2">Discussion Room</p>
+            <h:selectOneMenu class="form-select"
+                             id="discussionRoom" converter="#{roomConverter}" aria-label="Discussion room">
+                <f:selectItems value="#{reservationFormBean.existingRooms}" var="room"
+                               itemLabel="#{room.name}" itemValue="#{room}"></f:selectItems>
+            </h:selectOneMenu>
+        </div>
     </ui:define>
 
     <ui:define name="pageBody">
-        <h:dataTable id="dataTable" value="#{reservationFormBean.existingReservations}" var="item">
-            <h:column>
-                <f:facet name="header">Name</f:facet>
-                <h:outputText value="#{item.name}"/>
-            </h:column>
-            <h:column>
-                <f:facet name="header">Manufacturer</f:facet>
-                <h:outputText value="#{item.manufacturer}"/>
-            </h:column>
-            <h:column>
-                <f:facet name="header">Available Date</f:facet>
-                <h:outputText value="#{item.availableDate}"/>
-            </h:column>
-            <h:column>
-                <f:facet name="header">Description</f:facet>
-                <h:outputText value="#{item.description}"/>
-            </h:column>
-            <h:column>
-                <h:link value="Remove" outcome="confirm">
-                    <f:param name="itemId" value="#{item.itemId}"/>
-                </h:link>
-            </h:column>
-            <h:column>
-                <h:link value="Edit" outcome="update">
-                    <f:param name="itemId" value="#{item.itemId}"/>
-                </h:link>
-            </h:column>
-        </h:dataTable>
+        <ui:repeat value="#{reservationFormBean.reservationsGroupedByDate.entrySet().toArray()}" var="reservationGroups">
+            <h4 class="fw-normal mb-3">
+                <h:outputText value="#{reservationGroups.key}">
+                    <f:convertDateTime pattern = "MMMM d, yyyy" />
+                </h:outputText>
+            </h4>
+            <ui:repeat value="#{reservationGroups.value}" var="reservation">
+                <h:outputText value="#{reservation.studentName}"></h:outputText>
+            </ui:repeat>
+        </ui:repeat>
     </ui:define>
 </ui:composition>
 </html>

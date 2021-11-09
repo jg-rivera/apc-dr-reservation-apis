@@ -1,6 +1,6 @@
-package apc.entjava.dr_reservation.ejb.repository;
+package apc.entjava.dr_reservation.ejb.repositories;
 
-import apc.entjava.dr_reservation.ejb.entity.ReservationEntity;
+import apc.entjava.dr_reservation.ejb.entities.ReservationEntity;
 
 import java.util.Date;
 import java.util.List;
@@ -12,9 +12,6 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
-/**
- * Session Bean implementation class Catalog
- */
 @Singleton
 @LocalBean
 public class ReservationRepository implements IReservationRepository {
@@ -23,8 +20,8 @@ public class ReservationRepository implements IReservationRepository {
     private EntityManager entityManager;
 
     @Override
-    public List<ReservationEntity> getItems() {
-        return this.entityManager.createQuery("SELECT reservation FROM ReservationEntity reservation", ReservationEntity.class).getResultList();
+    public List<ReservationEntity> getReservations() {
+        return this.entityManager.createQuery("SELECT reservation FROM ReservationEntity reservation ORDER BY reservation.date, reservation.startTime ASC", ReservationEntity.class).getResultList();
     }
 
     @Override
@@ -58,6 +55,6 @@ public class ReservationRepository implements IReservationRepository {
     @Override
     public List<ReservationEntity> findMatchingReservationsByDate(Date date) {
         TypedQuery<ReservationEntity> query = this.entityManager.createQuery("SELECT reservation FROM ReservationEntity reservation WHERE reservation.date = :date", ReservationEntity.class);
-        return query.setParameter("date", "%" + date + "%").getResultList();
+        return query.setParameter("date", date).getResultList();
     }
 }

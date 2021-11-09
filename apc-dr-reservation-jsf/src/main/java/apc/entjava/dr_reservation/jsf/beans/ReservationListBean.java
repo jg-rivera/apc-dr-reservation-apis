@@ -1,7 +1,7 @@
-package apc.entjava.dr_reservation.jsf;
+package apc.entjava.dr_reservation.jsf.beans;
 
-import apc.entjava.dr_reservation.ejb.entity.ReservationEntity;
-import apc.entjava.dr_reservation.ejb.repository.IReservationRepository;
+import apc.entjava.dr_reservation.ejb.entities.ReservationEntity;
+import apc.entjava.dr_reservation.ejb.repositories.IReservationRepository;
 
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;

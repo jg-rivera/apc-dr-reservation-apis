@@ -1,4 +1,4 @@
-package apc.entjava.dr_reservation.ejb.entity;
+package apc.entjava.dr_reservation.ejb.entities;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -17,8 +17,9 @@ public class ReservationEntity {
     @Column(name = "student_name")
     private String studentName;
 
-    @Column(name = "room")
-    private String room;
+    @ManyToOne
+    @JoinColumn(name = "room_id", nullable = false)
+    private RoomEntity room;
 
     @Column(name = "reservation_date")
     private Date date;
@@ -40,7 +41,7 @@ public class ReservationEntity {
 
     }
 
-    public ReservationEntity(int id, String studentId, String studentName, String room, Date date, int startTime, int endTime, String purpose, String endorser) {
+    public ReservationEntity(int id, String studentId, String studentName, RoomEntity room, Date date, int startTime, int endTime, String purpose, String endorser) {
         this.id = id;
         this.studentId = studentId;
         this.studentName = studentName;
@@ -76,11 +77,11 @@ public class ReservationEntity {
         this.studentName = studentName;
     }
 
-    public String getRoom() {
+    public RoomEntity getRoom() {
         return room;
     }
 
-    public void setRoom(String room) {
+    public void setRoom(RoomEntity room) {
         this.room = room;
     }
 

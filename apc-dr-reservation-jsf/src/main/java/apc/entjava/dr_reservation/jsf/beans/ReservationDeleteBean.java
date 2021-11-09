@@ -1,4 +1,4 @@
-package apc.entjava.dr_reservation.jsf;
+package apc.entjava.dr_reservation.jsf.beans;
 
 import java.io.Serializable;
 
@@ -7,8 +7,8 @@ import javax.enterprise.context.ConversationScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import apc.entjava.dr_reservation.ejb.entity.ReservationEntity;
-import apc.entjava.dr_reservation.ejb.repository.IReservationRepository;
+import apc.entjava.dr_reservation.ejb.entities.ReservationEntity;
+import apc.entjava.dr_reservation.ejb.repositories.IReservationRepository;
 
 @ConversationScoped
 @Named

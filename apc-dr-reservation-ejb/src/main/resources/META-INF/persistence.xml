@@ -4,12 +4,9 @@
              xsi:schemaLocation="https://jakarta.ee/xml/ns/persistence https://jakarta.ee/xml/ns/persistence/persistence_3_0.xsd"
              version="3.0">
   <persistence-unit name="apc-dr-reservation-ejb">
+    <jta-data-source>java:/MySqlDS</jta-data-source>
     <properties>
-      <property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
-      <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/apc_discussion_room_reservation"/>
-      <property name="javax.persistence.jdbc.user" value="root"/>
-      <property name="javax.persistence.jdbc.password" value=""/>
-      <property name="javax.persistence.schema-generation.database.action"  value="drop-and-create"/>
+      <property name="javax.persistence.schema-generation.database.action"  value="none"/>
     </properties>
   </persistence-unit>
 </persistence>

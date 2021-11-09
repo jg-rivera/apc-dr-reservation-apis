@@ -6,6 +6,11 @@
       xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
 
 <ui:composition template="/template.xhtml">
+
+    <f:metadata>
+        <f:event type="preRenderView" listener="#{reservationFormBean.initialize()}"/>
+    </f:metadata>
+
     <ui:define name="pageTitle">
         <h:outputText value="#{msg['form.pageTitle']}"></h:outputText>
     </ui:define>
@@ -15,12 +20,13 @@
     </ui:define>
 
     <ui:define name="pageHeader">
-        <h2><h:outputText value="#{msg['form.pageTitle']}"></h:outputText></h2>
+        <div class="d-flex mt-5 justify-content-between mb-3">
+            <h2><h:outputText value="#{msg['form.pageTitle']}"></h:outputText></h2>
+        </div>
     </ui:define>
 
     <ui:define name="pageBody">
         <h:form class="mb-5">
-
             <!-- Student ID and Name -->
             <div class="row g-2 mt-1">
                 <div class="col-md">
@@ -47,10 +53,9 @@
                 <div class="col-md">
                     <div class="form-floating">
                         <h:selectOneMenu value="#{reservationFormBean.reservation.room}" class="form-select"
-                                         id="discussionRoom" aria-label="Discussion room">
-                            <f:selectItem itemValue="1" itemLabel="Discussion Room A"/>
-                            <f:selectItem itemValue="2" itemLabel="Discussion Room B"/>
-                            <f:selectItem itemValue="3" itemLabel="Discussion Room C"/>
+                                         id="discussionRoom" converter="#{roomConverter}" aria-label="Discussion room">
+                            <f:selectItems value="#{reservationFormBean.existingRooms}" var="room"
+                                           itemLabel="#{room.name}" itemValue="#{room}"></f:selectItems>
                         </h:selectOneMenu>
                         <h:outputLabel class="form-label" for="discussionRoom">Discussion Room</h:outputLabel>
                     </div>
@@ -63,7 +68,9 @@
                     <div class="form-floating">
                         <h:inputText value="#{reservationFormBean.reservation.date}" class="form-control datepicker"
                                      a:placeholder="Date"
-                                     id="date"></h:inputText>
+                                     id="date" autocomplete="off">
+                            <f:convertDateTime pattern="MM/dd/yyyy"/>
+                        </h:inputText>
                         <h:outputLabel class="form-label" for="date">Date</h:outputLabel>
                     </div>
                 </div>

@@ -1,6 +1,6 @@
-package apc.entjava.dr_reservation.ejb.repository;
+package apc.entjava.dr_reservation.ejb.repositories;
 
-import apc.entjava.dr_reservation.ejb.entity.ReservationEntity;
+import apc.entjava.dr_reservation.ejb.entities.ReservationEntity;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -11,7 +11,7 @@ import javax.ejb.Local;
 @Local
 public interface IReservationRepository extends Serializable {
 
-	List<ReservationEntity> getItems();
+	List<ReservationEntity> getReservations();
 
 	void addReservation(ReservationEntity item);
 
