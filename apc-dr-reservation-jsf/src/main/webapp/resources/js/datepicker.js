@@ -1,6 +1,10 @@
 $(function () {
     $(".datepicker").datepicker({
-        minDate: 0,
-        maxDate: "+1M"
+        minDate: "+1D",
+        maxDate: "+1M",
+        beforeShowDay: function (date) {
+            var day = date.getDay();
+            return [(day != 0 && day != 6), ''];
+        }
     });
 });

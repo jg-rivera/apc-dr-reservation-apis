@@ -11,7 +11,13 @@ import javax.ejb.Local;
 @Local
 public interface IReservationRepository extends Serializable {
 
-	List<ReservationEntity> getReservations();
+	List<ReservationEntity> getAllReservations();
+
+	List<ReservationEntity> getAllReservationsByDate(Date date);
+
+	List<ReservationEntity> getAllReservationsByRoom(int roomId);
+
+	List<ReservationEntity> getAllReservationsByDateAndRoom(Date date, int roomId);
 
 	void addReservation(ReservationEntity item);
 
@@ -20,6 +26,4 @@ public interface IReservationRepository extends Serializable {
 	void updateReservation(ReservationEntity item);
 
 	ReservationEntity findReservation(int id);
-
-	List<ReservationEntity> findMatchingReservationsByDate(Date date);
 }

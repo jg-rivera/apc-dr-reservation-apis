@@ -6,34 +6,70 @@
 
 <ui:composition template="/template.xhtml">
     <f:metadata>
-        <f:viewAction action="#{reservationFormBean.initialize}"></f:viewAction>
+        <f:viewAction action="#{reservationBean.initializeRooms()}"></f:viewAction>
+        <f:viewAction action="#{reservationBean.initializeReservations()}"></f:viewAction>
     </f:metadata>
 
     <ui:define name="pageHeader">
         <div class="d-flex mt-5 justify-content-between mb-3">
             <h2><h:outputText value="#{msg['list.pageTitle']}"></h:outputText></h2>
         </div>
-        <div class="mt-4">
+        <div class="mt-4 mb-4">
             <p class="mb-2">Discussion Room</p>
-            <h:selectOneMenu class="form-select"
-                             id="discussionRoom" converter="#{roomConverter}" aria-label="Discussion room">
-                <f:selectItems value="#{reservationFormBean.existingRooms}" var="room"
-                               itemLabel="#{room.name}" itemValue="#{room}"></f:selectItems>
-            </h:selectOneMenu>
+            <h:form>
+                <h:selectOneMenu class="form-select" id="discussionRoom"
+                                 onchange="submit()"
+                                 valueChangeListener="#{reservationBean.updateReservationListing}"
+                                 aria-label="Discussion room">
+                    <f:selectItem itemLabel="All Discussion Rooms" itemValue="*"></f:selectItem>
+                    <f:selectItems value="#{reservationBean.existingRooms}" var="room"
+                                   itemLabel="#{room.name}" itemValue="#{room.id}"></f:selectItems>
+                </h:selectOneMenu>
+            </h:form>
         </div>
     </ui:define>
 
     <ui:define name="pageBody">
-        <ui:repeat value="#{reservationFormBean.reservationsGroupedByDate.entrySet().toArray()}" var="reservationGroups">
-            <h4 class="fw-normal mb-3">
-                <h:outputText value="#{reservationGroups.key}">
-                    <f:convertDateTime pattern = "MMMM d, yyyy" />
-                </h:outputText>
-            </h4>
-            <ui:repeat value="#{reservationGroups.value}" var="reservation">
-                <h:outputText value="#{reservation.studentName}"></h:outputText>
+        <div style="margin-bottom: 200px">
+            <h:panelGroup rendered="#{reservationBean.existingReservations.isEmpty()}">
+                <div class="d-flex justify-content-center">
+                    <h4 class="fw-normal mt-3" style="vertical-align: middle;">
+                        <i class="bi bi-patch-question-fill"
+                           style="font-size: 32px;"></i> There are no reservations found.
+                    </h4>
+                </div>
+            </h:panelGroup>
+            <ui:repeat value="#{reservationBean.reservationsGroupedByDate.entrySet().toArray()}"
+                       var="reservationGroups">
+                <div class="mt-4">
+                    <h4 class="fw-normal mb-3">
+                        <h:outputText value="#{reservationGroups.key}">
+                            <f:convertDateTime pattern="MMMM d, yyyy"/>
+                        </h:outputText>
+                    </h4>
+                    <div class="list-group">
+                        <ui:repeat value="#{reservationGroups.value}" var="reservation">
+                            <label class="list-group-item d-flex gap-3">
+                                <div class="flex-shrink-0 align-self-center">
+                            <span class="badge rounded-pill bg-primary">
+                                <h:outputText
+                                        value="#{reservationBean.getRoomShorthand(reservation.room)}"></h:outputText>
+                            </span>
+                                </div>
+                                <span class="pt-1 form-checked-content">
+                            <strong><h:outputText value="#{reservation.purpose}"></h:outputText></strong>
+                            <small class="d-block text-muted">
+                                <i class="bi bi-calendar-event"></i>
+                                <h:outputText
+                                        value="#{reservationBean.getFormattedIntervalString(reservation)}"></h:outputText>
+                            </small>
+                        </span>
+                            </label>
+                        </ui:repeat>
+                    </div>
+                </div>
             </ui:repeat>
-        </ui:repeat>
+        </div>
     </ui:define>
 </ui:composition>
 </html>

@@ -15,7 +15,7 @@ import apc.entjava.dr_reservation.ejb.repositories.IReservationRepository;
 public class ReservationDeleteBean implements Serializable {
 
 	@Inject
-	private ReservationFormBean reservationFormBean;
+	private ReservationBean reservationFormBean;
 
 	@Inject
 	private IReservationRepository reservationRepositoryBean;

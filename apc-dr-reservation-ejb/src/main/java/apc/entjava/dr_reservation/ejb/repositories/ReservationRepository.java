@@ -20,8 +20,31 @@ public class ReservationRepository implements IReservationRepository {
     private EntityManager entityManager;
 
     @Override
-    public List<ReservationEntity> getReservations() {
-        return this.entityManager.createQuery("SELECT reservation FROM ReservationEntity reservation ORDER BY reservation.date, reservation.startTime ASC", ReservationEntity.class).getResultList();
+    public List<ReservationEntity> getAllReservations() {
+        return this.entityManager.createQuery("SELECT reservation FROM ReservationEntity reservation ORDER BY reservation.date, reservation.startTime, reservation.endTime ASC", ReservationEntity.class).getResultList();
+    }
+
+    @Override
+    public List<ReservationEntity> getAllReservationsByDate(Date date) {
+        String queryString = "SELECT reservation FROM ReservationEntity reservation WHERE reservation.date >= :date ORDER BY reservation.date, reservation.startTime, reservation.endTime ASC";
+        TypedQuery<ReservationEntity> query = this.entityManager.createQuery(queryString, ReservationEntity.class);
+        return query.setParameter("date", date).getResultList();
+    }
+
+    @Override
+    public List<ReservationEntity> getAllReservationsByRoom(int roomId) {
+        String queryString = "SELECT reservation FROM ReservationEntity reservation WHERE reservation.room.id = :roomId ORDER BY reservation.date, reservation.startTime, reservation.endTime ASC";
+        TypedQuery<ReservationEntity> query = this.entityManager.createQuery(queryString, ReservationEntity.class);
+        return query.setParameter("roomId", roomId).getResultList();
+    }
+
+    @Override
+    public List<ReservationEntity> getAllReservationsByDateAndRoom(Date date, int roomId) {
+        String queryString = "SELECT reservation FROM ReservationEntity reservation WHERE reservation.date >= :date AND reservation.room.id = :roomId ORDER BY reservation.date, reservation.startTime, reservation.endTime ASC";
+        TypedQuery<ReservationEntity> query = this.entityManager.createQuery(queryString, ReservationEntity.class);
+        query.setParameter("date", date);
+        query.setParameter("roomId", roomId);
+        return query.getResultList();
     }
 
     @Override
@@ -49,12 +72,5 @@ public class ReservationRepository implements IReservationRepository {
     @Override
     public ReservationEntity findReservation(int id) {
         return this.entityManager.find(ReservationEntity.class, id);
-    }
-
-
-    @Override
-    public List<ReservationEntity> findMatchingReservationsByDate(Date date) {
-        TypedQuery<ReservationEntity> query = this.entityManager.createQuery("SELECT reservation FROM ReservationEntity reservation WHERE reservation.date = :date", ReservationEntity.class);
-        return query.setParameter("date", date).getResultList();
     }
 }

@@ -8,7 +8,7 @@
 <ui:composition template="/template.xhtml">
 
     <f:metadata>
-        <f:event type="preRenderView" listener="#{reservationFormBean.initialize()}"/>
+        <f:event type="preRenderView" listener="#{reservationBean.initializeRooms()}"/>
     </f:metadata>
 
     <ui:define name="pageTitle">
@@ -26,12 +26,18 @@
     </ui:define>
 
     <ui:define name="pageBody">
-        <h:form class="mb-5">
+        <h:form style="margin-bottom: 200px;" a:autocomplete="off">
+            <ui:repeat value="#{facesContext.messageList}" var="facesMessage">
+                <div class="alert alert-danger" role="alert">
+                    <h:outputText value="#{facesMessage.summary}"></h:outputText>
+                </div>
+            </ui:repeat>
+
             <!-- Student ID and Name -->
             <div class="row g-2 mt-1">
                 <div class="col-md">
                     <div class="form-floating">
-                        <h:inputText value="#{reservationFormBean.reservation.studentId}" class="form-control"
+                        <h:inputText value="#{reservationBean.reservation.studentId}" class="form-control"
                                      a:placeholder="Student ID"
                                      id="studentId"> </h:inputText>
                         <h:outputLabel class="form-label" for="studentId">Student ID</h:outputLabel>
@@ -40,7 +46,7 @@
 
                 <div class="col-md">
                     <div class="form-floating">
-                        <h:inputText value="#{reservationFormBean.reservation.studentName}" class="form-control"
+                        <h:inputText value="#{reservationBean.reservation.studentName}" class="form-control"
                                      a:placeholder="Student Name"
                                      id="studentName"> </h:inputText>
                         <h:outputLabel class="form-label" for="studentName">Student Name</h:outputLabel>
@@ -52,9 +58,9 @@
             <div class="row g-2 mt-1">
                 <div class="col-md">
                     <div class="form-floating">
-                        <h:selectOneMenu value="#{reservationFormBean.reservation.room}" class="form-select"
+                        <h:selectOneMenu value="#{reservationBean.reservation.room}" class="form-select"
                                          id="discussionRoom" converter="#{roomConverter}" aria-label="Discussion room">
-                            <f:selectItems value="#{reservationFormBean.existingRooms}" var="room"
+                            <f:selectItems value="#{reservationBean.existingRooms}" var="room"
                                            itemLabel="#{room.name}" itemValue="#{room}"></f:selectItems>
                         </h:selectOneMenu>
                         <h:outputLabel class="form-label" for="discussionRoom">Discussion Room</h:outputLabel>
@@ -66,9 +72,9 @@
             <div class="row g-2 mt-1">
                 <div class="col-md">
                     <div class="form-floating">
-                        <h:inputText value="#{reservationFormBean.reservation.date}" class="form-control datepicker"
+                        <h:inputText value="#{reservationBean.reservation.date}" class="form-control datepicker"
                                      a:placeholder="Date"
-                                     id="date" autocomplete="off">
+                                     id="date">
                             <f:convertDateTime pattern="MM/dd/yyyy"/>
                         </h:inputText>
                         <h:outputLabel class="form-label" for="date">Date</h:outputLabel>
@@ -82,7 +88,7 @@
                 <!-- Start Time -->
                 <div class="col-md">
                     <div class="form-floating">
-                        <h:selectOneMenu value="#{reservationFormBean.reservation.startTime}" class="form-select"
+                        <h:selectOneMenu value="#{reservationBean.reservation.startTime}" class="form-select"
                                          id="startTime" aria-label="Start Time">
                             <f:selectItem itemValue="0" itemLabel="7:00 AM"/>
                             <f:selectItem itemValue="30" itemLabel="7:30 AM"/>
@@ -117,7 +123,7 @@
                 <!-- End Time -->
                 <div class="col-md">
                     <div class="form-floating">
-                        <h:selectOneMenu value="#{reservationFormBean.reservation.endTime}" class="form-select"
+                        <h:selectOneMenu value="#{reservationBean.reservation.endTime}" class="form-select"
                                          id="endTime" aria-label="End Time">
                             <f:selectItem itemValue="0" itemLabel="7:00 AM"/>
                             <f:selectItem itemValue="30" itemLabel="7:30 AM"/>
@@ -154,7 +160,7 @@
             <div class="row g-2 mt-1">
                 <div class="col-md">
                     <div class="form-floating">
-                        <h:inputTextarea value="#{reservationFormBean.reservation.purpose}" class="form-control"
+                        <h:inputTextarea value="#{reservationBean.reservation.purpose}" class="form-control"
                                          a:placeholder="Purpose"
                                          style="height: 80px" id="purpose"></h:inputTextarea>
                         <h:outputLabel class="form-label" for="purpose">Purpose</h:outputLabel>
@@ -166,7 +172,7 @@
             <div class="row g-2 mt-1">
                 <div class="col-md">
                     <div class="form-floating">
-                        <h:inputText value="#{reservationFormBean.reservation.endorser}" type="text"
+                        <h:inputText value="#{reservationBean.reservation.endorser}" type="text"
                                      a:placeholder="Endorser"
                                      class="form-control" id="endorser"></h:inputText>
                         <h:outputLabel class="form-label" for="endorser">Endorser</h:outputLabel>
@@ -177,7 +183,7 @@
             <!-- Submit button -->
             <div class="d-grid mt-4">
                 <h:commandButton class="btn btn-primary" value="Submit"
-                                 action="#{reservationFormBean.addReservation()}"/>
+                                 action="#{reservationBean.addReservation()}"/>
             </div>
         </h:form>
     </ui:define>
