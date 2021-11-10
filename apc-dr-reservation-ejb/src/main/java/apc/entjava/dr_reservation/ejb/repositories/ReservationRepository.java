@@ -48,8 +48,9 @@ public class ReservationRepository implements IReservationRepository {
     }
 
     @Override
-    public void addReservation(ReservationEntity item) {
+    public int addReservation(ReservationEntity item) {
         this.entityManager.persist(item);
+        return item.getId();
     }
 
     @Override

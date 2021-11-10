@@ -51,7 +51,7 @@
                         <ui:repeat value="#{reservationGroups.value}" var="reservation">
                             <label class="list-group-item d-flex gap-3">
                                 <div class="flex-shrink-0 align-self-center">
-                            <span class="badge rounded-pill bg-primary">
+                            <span class="badge rounded-pill" style="#{reservationBean.getRoomStyling(reservation.room)}">
                                 <h:outputText
                                         value="#{reservationBean.getRoomShorthand(reservation.room)}"></h:outputText>
                             </span>

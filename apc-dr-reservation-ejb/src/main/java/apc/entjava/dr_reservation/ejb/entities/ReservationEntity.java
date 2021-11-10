@@ -5,7 +5,7 @@ import java.util.Date;
 
 @Entity
 @Table(name = "reservations")
-public class ReservationEntity {
+public class ReservationEntity implements Comparable<ReservationEntity> {
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -51,6 +51,11 @@ public class ReservationEntity {
         this.endTime = endTime;
         this.purpose = purpose;
         this.endorser = endorser;
+    }
+
+    @Override
+    public int compareTo(ReservationEntity other) {
+        return getStartTime() - other.getStartTime();
     }
 
     public int getId() {

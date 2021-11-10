@@ -19,7 +19,7 @@ public interface IReservationRepository extends Serializable {
 
 	List<ReservationEntity> getAllReservationsByDateAndRoom(Date date, int roomId);
 
-	void addReservation(ReservationEntity item);
+	int addReservation(ReservationEntity item);
 
 	void deleteReservation(ReservationEntity item);
 

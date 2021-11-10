@@ -101,7 +101,8 @@ public class ReservationBean implements Serializable {
             return null;
         }
 
-        this.reservationRepository.addReservation(this.currentReservation);
+        int reservationId = this.reservationRepository.addReservation(this.currentReservation);
+
         return "list?faces-redirect=true";
     }
 
@@ -127,6 +128,7 @@ public class ReservationBean implements Serializable {
             return scheduleConflicts;
         }
 
+        List<ReservationEntity> reservationConflicts = new ArrayList<>();
         int newReservationStartTime = newReservation.getStartTime();
         int newReservationEndTime = newReservation.getEndTime();
 
@@ -134,11 +136,18 @@ public class ReservationBean implements Serializable {
             int existingReservationStartTime = existingReservation.getStartTime();
             int existingReservationEndTime = existingReservation.getEndTime();
 
-            System.out.printf("%d >= %d and %d <= %d\n", existingReservationStartTime, newReservationStartTime, existingReservationEndTime, newReservationEndTime);
             if (existingReservationStartTime >= newReservationStartTime && existingReservationEndTime <= newReservationEndTime) {
-                String scheduleConflictTime = this.getFormattedIntervalString(existingReservationStartTime, existingReservationEndTime);
-                scheduleConflicts.add(scheduleConflictTime);
+                reservationConflicts.add(existingReservation);
             }
+        }
+
+        Collections.sort(reservationConflicts);
+
+        for (ReservationEntity reservationConflict : reservationConflicts) {
+            int startTime = reservationConflict.getStartTime();
+            int endTime = reservationConflict.getEndTime();
+            String scheduleConflictTime = this.getFormattedIntervalString(startTime, endTime);
+            scheduleConflicts.add(scheduleConflictTime);
         }
 
         return scheduleConflicts;
@@ -164,6 +173,19 @@ public class ReservationBean implements Serializable {
 
     public void setReservation(ReservationEntity item) {
         this.currentReservation = item;
+    }
+
+    public String getRoomStyling(RoomEntity room) {
+        switch (room.getId()) {
+            case 1:
+                return "background-color: #513A9F";
+            case 2:
+                return "background-color: #37579A";
+            case 3:
+                return "background-color: #171717";
+            default:
+                return "background-color: #000000";
+        }
     }
 
     public String getRoomShorthand(RoomEntity room) {
