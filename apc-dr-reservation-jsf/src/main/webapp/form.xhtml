@@ -39,7 +39,8 @@
                     <div class="form-floating">
                         <h:inputText value="#{reservationBean.reservation.studentId}" class="form-control"
                                      a:placeholder="Student ID"
-                                     id="studentId"> </h:inputText>
+                                     id="studentId"
+                                     required="true"> </h:inputText>
                         <h:outputLabel class="form-label" for="studentId">Student ID</h:outputLabel>
                     </div>
                 </div>
@@ -48,7 +49,8 @@
                     <div class="form-floating">
                         <h:inputText value="#{reservationBean.reservation.studentName}" class="form-control"
                                      a:placeholder="Student Name"
-                                     id="studentName"> </h:inputText>
+                                     id="studentName"
+                                     required="true"> </h:inputText>
                         <h:outputLabel class="form-label" for="studentName">Student Name</h:outputLabel>
                     </div>
                 </div>
@@ -74,7 +76,8 @@
                     <div class="form-floating">
                         <h:inputText value="#{reservationBean.reservation.date}" class="form-control datepicker"
                                      a:placeholder="Date"
-                                     id="date">
+                                     id="date"
+                                     required="true">
                             <f:convertDateTime pattern="MM/dd/yyyy"/>
                         </h:inputText>
                         <h:outputLabel class="form-label" for="date">Date</h:outputLabel>
@@ -162,7 +165,7 @@
                     <div class="form-floating">
                         <h:inputTextarea value="#{reservationBean.reservation.purpose}" class="form-control"
                                          a:placeholder="Purpose"
-                                         style="height: 80px" id="purpose"></h:inputTextarea>
+                                         style="height: 80px" id="purpose" required="true"></h:inputTextarea>
                         <h:outputLabel class="form-label" for="purpose">Purpose</h:outputLabel>
                     </div>
                 </div>
@@ -174,7 +177,7 @@
                     <div class="form-floating">
                         <h:inputText value="#{reservationBean.reservation.endorser}" type="text"
                                      a:placeholder="Endorser"
-                                     class="form-control" id="endorser"></h:inputText>
+                                     class="form-control" id="endorser" required="true"></h:inputText>
                         <h:outputLabel class="form-label" for="endorser">Endorser</h:outputLabel>
                     </div>
                 </div>
