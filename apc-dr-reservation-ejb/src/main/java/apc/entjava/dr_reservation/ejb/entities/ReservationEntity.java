@@ -58,6 +58,16 @@ public class ReservationEntity implements Comparable<ReservationEntity> {
         return getStartTime() - other.getStartTime();
     }
 
+    public boolean conflictsWith(ReservationEntity other) {
+        if (getEndTime() <= other.getStartTime()) {
+            return false;
+        }
+        if (other.getEndTime() <= getStartTime()) {
+            return false;
+        }
+        return true;
+    }
+
     public int getId() {
         return id;
     }

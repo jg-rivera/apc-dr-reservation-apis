@@ -10,6 +10,10 @@
         <f:viewAction action="#{reservationBean.initializeReservations()}"></f:viewAction>
     </f:metadata>
 
+    <ui:define name="pageTitle">
+        <h:outputText value="#{msg['list.pageTitle']}"></h:outputText>
+    </ui:define>
+
     <ui:define name="pageHeader">
         <div class="d-flex mt-5 justify-content-between mb-3">
             <h2><h:outputText value="#{msg['list.pageTitle']}"></h:outputText></h2>
@@ -51,7 +55,8 @@
                         <ui:repeat value="#{reservationGroups.value}" var="reservation">
                             <label class="list-group-item d-flex gap-3">
                                 <div class="flex-shrink-0 align-self-center">
-                            <span class="badge rounded-pill" style="#{reservationBean.getRoomStyling(reservation.room)}">
+                            <span class="badge rounded-pill"
+                                  style="#{reservationBean.getRoomStyling(reservation.room)}">
                                 <h:outputText
                                         value="#{reservationBean.getRoomShorthand(reservation.room)}"></h:outputText>
                             </span>

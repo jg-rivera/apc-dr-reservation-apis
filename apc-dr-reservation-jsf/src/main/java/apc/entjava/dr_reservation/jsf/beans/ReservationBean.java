@@ -102,6 +102,7 @@ public class ReservationBean implements Serializable {
         }
 
         int reservationId = this.reservationRepository.addReservation(this.currentReservation);
+        this.currentReservation = new ReservationEntity();
 
         return "list?faces-redirect=true";
     }
@@ -129,14 +130,9 @@ public class ReservationBean implements Serializable {
         }
 
         List<ReservationEntity> reservationConflicts = new ArrayList<>();
-        int newReservationStartTime = newReservation.getStartTime();
-        int newReservationEndTime = newReservation.getEndTime();
-
+        
         for (ReservationEntity existingReservation : sameDayRoomReservations) {
-            int existingReservationStartTime = existingReservation.getStartTime();
-            int existingReservationEndTime = existingReservation.getEndTime();
-
-            if (existingReservationStartTime >= newReservationStartTime && existingReservationEndTime <= newReservationEndTime) {
+            if (existingReservation.conflictsWith(newReservation)) {
                 reservationConflicts.add(existingReservation);
             }
         }
